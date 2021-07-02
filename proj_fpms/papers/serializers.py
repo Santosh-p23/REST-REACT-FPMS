@@ -5,7 +5,7 @@ from papers.models import Journal, Report, Conference_Article, Books, Miscellane
 class JournalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Journal
-        exclude = ('author',)
+        fields = '__all__'
 
 
 class ReportSerializer(serializers.ModelSerializer):

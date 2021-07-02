@@ -7,11 +7,11 @@ from django.utils import timezone
 
 class Journal(models.Model):
     title = models.CharField(max_length=250)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     publisher = models.CharField(max_length=50, null=True, blank=True)
     volume = models.CharField(max_length=50, null=True, blank=True)
     peer_reviewed = models.CharField(max_length=50, null=True, blank=True)
-    ISSN = models.CharField(max_length=50, null=True, blank=True)
+    issn = models.CharField(max_length=50, null=True, blank=True)
     issue = models.CharField(max_length=50, null=True, blank=True)
     pages = models.CharField(max_length=50, null=True, blank=True)
     journal_link = models.CharField(max_length=250, null=True, blank=True)
@@ -24,7 +24,7 @@ class Journal(models.Model):
     options = (('draft', 'Draft'), ('published', 'Published'))
 
     status = models.CharField(
-        max_length=10, choices=options, default='published')
+        max_length=10, choices=options, default='published', null=True)
 
     objects = models.Manager()  # default manager
     postobjects = PostPapers()  # custom manager
@@ -37,8 +37,8 @@ class Journal(models.Model):
 
 
 class Publication(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=250)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     publication_date = models.DateField(null=True, blank=True)
     DOI = models.CharField(max_length=50, null=True, blank=True)
     publisher = models.CharField(max_length=50, null=True, blank=True)
@@ -65,7 +65,7 @@ class Publication(models.Model):
 
 class Conference_Article(models.Model):
     title = models.CharField(max_length=250)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     conference_name = models.CharField(max_length=200)
     location = models.CharField(max_length=50, null=True, blank=True)
     organised_date = models.DateTimeField()

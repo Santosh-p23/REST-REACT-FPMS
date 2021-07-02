@@ -11,7 +11,8 @@ from django.contrib.auth.models import User
 
 class JournalViewSet(viewsets.ModelViewSet):
     queryset = Journal.postobjects.all()
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticated]
+   #permission_classes = [permissions.AllowAny]
 
     serializer_class = JournalSerializer
     ordering = ['-publication_date']
