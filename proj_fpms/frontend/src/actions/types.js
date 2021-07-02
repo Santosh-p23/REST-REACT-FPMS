@@ -1,6 +1,6 @@
-export const GET_JOURNALS = "GET_JOURNALS"
-export const DELETE_JOURNALS = "DELETE_JOURNALS"
-export const ADD_JOURNALS = "ADD_JOURNALS"
+export const GET_PAPERS = "GET_PAPERS"
+export const DELETE_PAPERS = "DELETE_PAPERS"
+export const ADD_PAPERS = "ADD_PAPERS"
 
 export const GET_ERRORS = "GET_ERRORS"
 

@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import { addJournals } from '../../../actions/journals';
+import { addPapers } from '../../actions/papers';
 
-export class JournalForm extends Component {
+export class PaperForm extends Component {
     
     static propTypes ={
-        addJournals: PropTypes.func.isRequired
+        addPapers: PropTypes.func.isRequired
     }
 
     state ={
@@ -17,9 +17,10 @@ export class JournalForm extends Component {
         issn:'',
         issue:'',
         pages:'',
-        journal_link:'',
-        publication_date:''  ,
+        paper_link:'',
+        publication_date:"",
         status:'',
+        group:'',
         description:'' 
     }
 
@@ -32,9 +33,10 @@ export class JournalForm extends Component {
 
     onSubmit =(e)=>{
         e.preventDefault();
-        const{ title, publisher, volume, peer_reviewed, issn, issue, pages,journal_link,publication_date  ,status } = this.state
-        
-        this.props.addJournals(title, publisher, volume, peer_reviewed, issn, issue, pages,journal_link,publication_date ,status )
+        const{ title, publisher, volume, peer_reviewed, issn, issue, pages,paper_link,publication_date  ,status, group, description } = this.state
+        const paper = { title, publisher, volume, peer_reviewed, issn, issue, pages,paper_link,publication_date  ,status, group, description }
+        this.props.addPapers(paper)
+        console.log(paper)
         this.setState({
           title:'',
           publisher:'',
@@ -43,18 +45,17 @@ export class JournalForm extends Component {
           issn:'',
           issue:'',
           pages:'',
-          journal_link:'',
-          publication_date:''  ,
-          status:'',
+          paper_link:'',
+          publication_date:'',
           description:'' 
         })
     }
     
     render() {
-        const{ title, publisher, volume, peer_reviewed, issn, issue, pages,journal_link,publication_date  ,description } = this.state
+        const{ title, publisher, volume, peer_reviewed, issn, issue, pages,paper_link,publication_date ,status,group, description } = this.state
         return (
             <div className="card card-body mt-4 mb-4">
-        <h2>Add Journal</h2>
+        <h2>Add Papers</h2>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <label>Title</label>
@@ -134,13 +135,13 @@ export class JournalForm extends Component {
           </div>
 
           <div className="form-group">
-            <label>Journal Link</label>
+            <label>Paper's Link</label>
             <input
               className="form-control"
               type="text"
-              name="journal_link"
+              name="paper_link"
               onChange={this.onChange}
-              value={journal_link}
+              value={paper_link}
             />
           </div>
 
@@ -171,10 +172,27 @@ export class JournalForm extends Component {
             <select className="form-control"
                     onChange={this.onChange}
                     name ="status">
-            <option value="Draft ">Draft</option>
-            <option value="Published">Published</option>
+            <option value ="">---</option>
+            <option value="draft">Draft</option>
+            <option value="published">Published</option>
             </select>
             </div>
+            
+            <div className="form-group">
+            <label>Group</label>
+            <select className="form-control"
+                    onChange={this.onChange}
+                    name ="group">
+            <option value ="">---</option>
+            <option value="journal">Journal</option>
+            <option value="publication">Publication</option>
+            <option value="report">Report</option>
+            <option value="conference_article">Conference Article</option>
+            <option value="book">Book</option>
+            <option value="misc_paper">Miscellaneous Papers</option>
+            </select>
+            </div>
+
           <div className="form-group">
             <button type="submit" className="btn btn-primary">
               Submit
@@ -186,4 +204,4 @@ export class JournalForm extends Component {
     }
 }
 
-export default connect(null,{ addJournals })(JournalForm)
+export default connect(null,{ addPapers })(PaperForm)

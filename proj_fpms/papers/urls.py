@@ -1,7 +1,7 @@
 from rest_framework import routers
-from .api import JournalViewSet
+from .api import PaperViewSet
 
 router = routers.DefaultRouter()
-router.register('api/journals', JournalViewSet, 'journals')
+router.register('api/papers', PaperViewSet, 'papers')
 
 urlpatterns = router.urls

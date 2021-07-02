@@ -10,7 +10,7 @@ import {Provider} from 'react-redux'
 import store from '../store.js'
 
 import Header from './layout/Header'
-import DashBoard from './papers/journals/Dashboard'
+import DashBoard from './papers/DashBoard'
 import Alerts from "./layout/Alerts";
 
 import Login from "./accounts/Login"
@@ -29,7 +29,6 @@ const alertOptions ={
 class App extends Component {
 
     componentDidMount(){
-
         store.dispatch(loadUser());
     }
     render() {

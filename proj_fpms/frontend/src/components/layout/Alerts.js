@@ -25,12 +25,12 @@ componentDidUpdate(prevProps){
     }
 
     if(message !== prevProps.message){
-        if(message.deleteJournal){
-            alert.success(message.deleteJournal)
+        if(message.deletePaper){
+            alert.success(message.deletePaper)
         }
 
-        if(message.addJournal){
-            alert.success(message.addJournal)
+        if(message.addPaper){
+            alert.success(message.addPaper)
         }
 
         if (message.passwordNotMatch) alert.error(message.passwordNotMatch)
