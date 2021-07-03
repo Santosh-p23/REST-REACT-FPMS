@@ -34,6 +34,8 @@ componentDidUpdate(prevProps){
         }
 
         if (message.passwordNotMatch) alert.error(message.passwordNotMatch)
+
+        if(message.verifyEmail) alert.success(message.verifyEmail)
     }
 }
 

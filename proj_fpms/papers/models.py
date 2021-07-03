@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from accounts.models import User
 from django.utils import timezone
 
 # Create your models here.
@@ -49,9 +49,9 @@ class Paper(models.Model):
     co_authors = models.CharField(max_length=250, null=True, blank=True)
 
     # conference_article-specific
-    conference_name = models.CharField(max_length=200, null = True, blank =True)
+    conference_name = models.CharField(max_length=200, null=True, blank=True)
     location = models.CharField(max_length=50, null=True, blank=True)
-    organised_date = models.DateTimeField(null = True, blank = True)
+    organised_date = models.DateTimeField(null=True, blank=True)
     page = models.CharField(max_length=50, null=True, blank=True)
     issue = models.CharField(max_length=200, null=True, blank=True)
 

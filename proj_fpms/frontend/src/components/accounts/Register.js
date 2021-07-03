@@ -11,7 +11,8 @@ export class Register extends Component {
         username:"",
         email:"",
         password:"",
-        password2:""
+        password2:"",
+        registered: false
     }
 
     static propTypes ={
@@ -22,7 +23,7 @@ export class Register extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        const { username, email, password, password2 } = this.state;
+        const { username, email, password, password2, registered } = this.state;
         if (password !== password2) {
           this.props.createMessages({ passwordNotMatch: 'Passwords do not match' });
         } else {
@@ -32,6 +33,10 @@ export class Register extends Component {
             email
           };
           this.props.register(newUser);
+          this.props.createMessages({ verifyEmail: 'Please verify your email.' });
+          this.setState({
+              registered: true
+          })
         }
       };
 
@@ -43,8 +48,8 @@ export class Register extends Component {
     }
 
     render() {
-        if(this.props.isAuthenticated){
-            return <Redirect to ="/" />
+        if(this.state.registered){
+            return <Redirect to ="/login" />
         }
         const {username, email, password, password2} =this.state
         return (

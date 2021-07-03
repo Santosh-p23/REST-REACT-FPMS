@@ -1,8 +1,16 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 
 
-User._meta.get_field('email')._unique = True
+class User(AbstractUser):
+    email = models.EmailField(
+        verbose_name='email address',
+        max_length=255,
+        unique=True,
+    )
+    registerToken = models.CharField(max_length=255, null=True)
+
+
 # User._meta.get_field('email').null = False
 # User._meta.get_field('email').blank = False
 
