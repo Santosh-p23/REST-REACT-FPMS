@@ -20,9 +20,9 @@ export class Header extends Component {
 
     <Navbar.Brand href="#">Paperclip</Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" aria-expanded="false" aria-label="Toggle navigation"/>
-    <Navbar.Collapse id="basic-navbar-nav">
+    <Navbar.Collapse id="basic-navbar-nav justify-content-end">
 
-      { isAuthenticated ?(<Nav className="nav justify-content-end">
+      { isAuthenticated ?(<Nav className="nav ">
        
          <Link to="/profile" className ="navbar nav-link " >Profile</Link>
          <button onClick={this.props.logout} className =" nav-link btn btn-primary">Log Out</button>
@@ -41,7 +41,7 @@ export class Header extends Component {
     </NavDropdown> */}
  
     <Form className="inline" >
-      <FormControl type="text" placeholder="Search" style={{}} className="me-auto-sm-2" />
+      <FormControl type="text" placeholder="Search" style={{}} className="ml-auto-sm-2" />
     </Form>
       <Button variant="outline-primary ">Search</Button>
 

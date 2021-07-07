@@ -1,24 +1,56 @@
 from rest_framework import serializers
-from .models import User
+from .models import User, Profile
 from django.contrib.auth import authenticate
 
 
+class ProfileSerializer(serializers.ModelSerializer):
+    # image_path = serializers.SerializerMethodField('get_image_path')
+
+    class Meta:
+        model = Profile
+        fields = ('full_name', 'image',
+                  'about_me', 'institute', 'address')
+
+    # def get_image_path(self, obj):
+    #     return obj.image.url
+
+
 class UserSerializer(serializers.ModelSerializer):
+    profile = serializers.SerializerMethodField()
+
     class Meta:
         model = User
-        fields = ('id', 'username', 'email')
+        fields = ('id', 'username', 'email', 'profile')
+
+    def get_profile(self, obj):
+        try:
+            profile = obj.profile
+            return ProfileSerializer(profile).data
+        except:
+            return None
 
 
 class RegisterSerializer(serializers.ModelSerializer):
+    profile = ProfileSerializer(required=True)
+
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'password')
+        fields = ('id', 'username', 'email', 'password', 'profile')
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
         user = User.objects.create_user(
             validated_data['username'], validated_data['email'], validated_data['password'])
 
+        profile_data = validated_data.pop('profile')
+        profile = Profile.objects.create(
+            user=user,
+            full_name=profile_data['full_name'],
+            # image=profile_data['image'],
+            about_me=profile_data['about_me'],
+            institute=profile_data['institute'],
+            address=profile_data["address"]
+        )
         return user
 
 

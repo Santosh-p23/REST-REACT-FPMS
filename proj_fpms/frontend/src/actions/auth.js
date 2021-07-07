@@ -9,8 +9,10 @@ import {
     LOGIN_FAIL,
     LOGOUT_SUCCESS,
     REGISTER_FAIL,
-    REGISTER_SUCCESS
+    REGISTER_SUCCESS,
 } from './types'
+
+
 
 
 export const loadUser = () => (dispatch, getState) => {
@@ -74,7 +76,7 @@ export const logout = () => (dispatch, getState) => {
 };
 
 
-export const register = ({ username, password, email }) => (dispatch) => {
+export const register = ({ username, password, email, profile }) => (dispatch) => {
     // Headers
     const config = {
         headers: {
@@ -83,7 +85,7 @@ export const register = ({ username, password, email }) => (dispatch) => {
     };
 
     // Request Body
-    const body = JSON.stringify({ username, email, password });
+    const body = JSON.stringify({ username, email, password, profile });
 
     axios
         .post('/api/auth/register', body, config)

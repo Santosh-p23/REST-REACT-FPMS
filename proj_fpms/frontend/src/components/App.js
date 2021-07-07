@@ -15,6 +15,8 @@ import Alerts from "./layout/Alerts";
 
 import Login from "./accounts/Login"
 import Register from "./accounts/Register"
+import Profile from "./accounts/Profile"
+import Search from './papers/Search.js'
 
 import PrivateRoute from "./common/PrivateRoute"
 
@@ -43,7 +45,8 @@ class App extends Component {
                 <Alerts />
                 <Header />
                     <Switch>
-                        <PrivateRoute exact path ="/" component ={ DashBoard } />
+                        <PrivateRoute exact path ="/profile" component ={ DashBoard } />
+                        <PrivateRoute exact path ="/" component ={ Search } />
                         <Route exact path ="/register" component ={ Register } />
                         <Route exact path ="/login" component ={ Login } />
                     

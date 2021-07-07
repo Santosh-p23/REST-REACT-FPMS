@@ -1,13 +1,13 @@
 import axios from 'axios'
 import { createMessages, returnErrors } from './messages'
 
-import { GET_PAPERS, DELETE_PAPERS, ADD_PAPERS } from './types'
+import { GET_PAPERS, DELETE_PAPERS, ADD_PAPERS, SEARCH_PAPERS } from './types'
 
 import { tokenConfig } from './auth'
 
 
-export const getPapers = () => (dispatch, getState) => {
-    axios.get('/api/papers/', tokenConfig(getState))
+export const getPapers = (id) => (dispatch, getState) => {
+    axios.get(`/api/papers/${id}/get_user_posts`, tokenConfig(getState))
         .then(res => {
             dispatch({
                 type: GET_PAPERS,
@@ -16,6 +16,32 @@ export const getPapers = () => (dispatch, getState) => {
         })
         .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 }
+
+
+
+export const searchPapers = (value) => (dispatch, getState) => {
+    axios.get(`/api/search/?search=${value}`, tokenConfig(getState))
+        .then(res => {
+            dispatch({
+                type: SEARCH_PAPERS,
+                payload: res.data
+            });
+        })
+        .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
+}
+
+
+// export const getPapers = () => (dispatch, getState) => {
+//     axios.get(`/api/papers/`, tokenConfig(getState))
+//         .then(res => {
+//             dispatch({
+//                 type: GET_PAPERS,
+//                 payload: res.data
+//             });
+//         })
+//         .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
+// }
+
 
 export const deletePapers = (id) => (dispatch, getState) => {
     axios

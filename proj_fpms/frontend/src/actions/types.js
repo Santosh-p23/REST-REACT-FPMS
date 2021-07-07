@@ -1,6 +1,7 @@
 export const GET_PAPERS = "GET_PAPERS"
 export const DELETE_PAPERS = "DELETE_PAPERS"
 export const ADD_PAPERS = "ADD_PAPERS"
+export const SEARCH_PAPERS = "SEARCH_PAPERS"
 
 export const GET_ERRORS = "GET_ERRORS"
 
@@ -17,3 +18,5 @@ export const LOGIN_FAIL = "LOGIN_FAIL"
 
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS"
 export const REGISTER_FAIL = "REGISTER_FAIL"
+
+export const GET_PROFILE = "GET_PROFILE"

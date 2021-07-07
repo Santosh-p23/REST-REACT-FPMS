@@ -40,20 +40,18 @@ class Paper(models.Model):
     # publication-specific
     DOI = models.CharField(max_length=50, null=True, blank=True)
 
-    # books-specific
-    volume = models.CharField(max_length=50, null=True, blank=True)
+    # books-specific DOI and volume
+
     edition = models.CharField(max_length=50, null=True, blank=True)
     ISBN = models.CharField(max_length=50, null=True, blank=True)
-    DOI = models.CharField(max_length=50, null=True, blank=True)
     chapters = models.CharField(max_length=50, null=True, blank=True)
     co_authors = models.CharField(max_length=250, null=True, blank=True)
 
-    # conference_article-specific
+    # conference_article-specific pages and issue
     conference_name = models.CharField(max_length=200, null=True, blank=True)
     location = models.CharField(max_length=50, null=True, blank=True)
-    organised_date = models.DateTimeField(null=True, blank=True)
-    page = models.CharField(max_length=50, null=True, blank=True)
-    issue = models.CharField(max_length=200, null=True, blank=True)
+    organised_date = models.DateField(
+        null=True, blank=True, default=publication_date)
 
     class JournalPapers(models.Manager):
         def get_queryset(self):

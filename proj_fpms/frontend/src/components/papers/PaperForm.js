@@ -6,22 +6,38 @@ import { addPapers } from '../../actions/papers';
 export class PaperForm extends Component {
     
     static propTypes ={
-        addPapers: PropTypes.func.isRequired
-    }
+        addPapers: PropTypes.func.isRequired,
+
+      }
 
     state ={
-        title:'',
-        publisher:'',
-        volume:'',
-        peer_reviewed:'',
-        issn:'',
-        issue:'',
-        pages:'',
-        paper_link:'',
-        publication_date:"",
-        status:'',
-        group:'',
-        description:'' 
+      title:'',
+      description:'', 
+      group:'',
+      paper_link:'',
+      publisher:'',
+      publication_date:"",
+      status:'',
+      
+      volume:'',
+      peer_reviewed:'',
+      issn:'',
+      issue:'',
+      pages:'',
+
+      DOI:'',
+
+      edition:'',
+      ISBN:'',
+
+      chapters:'',
+      co_authors:'',
+
+      conference_name:'',
+      location:'',
+      organised_date: null
+
+
     }
 
 
@@ -33,8 +49,8 @@ export class PaperForm extends Component {
 
     onSubmit =(e)=>{
         e.preventDefault();
-        const{ title, publisher, volume, peer_reviewed, issn, issue, pages,paper_link,publication_date  ,status, group, description } = this.state
-        const paper = { title, publisher, volume, peer_reviewed, issn, issue, pages,paper_link,publication_date  ,status, group, description }
+        const{ title, publisher, volume, peer_reviewed, issn, issue, pages,paper_link,publication_date  ,status, group, description , DOI, edition, isbn, chapters, co_authors, conference_name, location, organised_date} = this.state
+        const paper = { title, publisher, volume, peer_reviewed, issn, issue, pages,paper_link,publication_date  ,status, group, description , DOI, edition, isbn, chapters, co_authors, conference_name, location, organised_date}
         this.props.addPapers(paper)
         console.log(paper)
         this.setState({
@@ -47,16 +63,44 @@ export class PaperForm extends Component {
           pages:'',
           paper_link:'',
           publication_date:'',
-          description:'' 
+          description:'',
+          DOI:'',
+
+          edition:'',
+          isbn:'',
+  
+          chapters:'',
+          co_authors:'',
+  
+          conference_name:'',
+          location:'',
+          organised_date:null
         })
     }
     
     render() {
-        const{ title, publisher, volume, peer_reviewed, issn, issue, pages,paper_link,publication_date ,status,group, description } = this.state
+        const{ title, publisher, volume, peer_reviewed, issn, issue, pages,paper_link,publication_date ,status,group, description , DOI, edition, isbn, chapters, co_authors, conference_name, location, organised_date} = this.state
         return (
             <div className="card card-body mt-4 mb-4">
+    
         <h2>Add Papers</h2>
         <form onSubmit={this.onSubmit}>
+
+        <div className="form-group">
+            <label>Group</label>
+            <select className="form-control"
+                    onChange={this.onChange}
+                    name ="group">
+            <option value ="">---</option>
+            <option value="journal">Journal</option>
+            <option value="publication">Publication</option>
+            <option value="report">Report</option>
+            <option value="conference_article">Conference Article</option>
+            <option value="book">Book</option>
+            <option value="misc_paper">Miscellaneous Papers</option>
+            </select>
+            </div>
+
           <div className="form-group">
             <label>Title</label>
             <input
@@ -80,6 +124,18 @@ export class PaperForm extends Component {
           </div>
 
           <div className="form-group">
+            <label>Description</label>
+            <textarea
+              className="form-control"
+              type="text"
+              name="description"
+              onChange={this.onChange}
+              value={description}
+            />
+          </div>
+
+          { (group=="journal" || group =="book") ? (
+          <div className="form-group">
             <label>Volume</label>
             <input
               className="form-control"
@@ -88,19 +144,45 @@ export class PaperForm extends Component {
               onChange={this.onChange}
               value={volume}
             />
-          </div>
+          </div>):""}
 
-          <div className="form-group">
-            <label>Peer Reviewed</label>
+          { (group=="journal" || group =="conference_article") ? (
+            <><div className="form-group">
+            <label>Issue</label>
             <input
               className="form-control"
               type="text"
-              name="peer_reviewed"
+              name="issue"
               onChange={this.onChange}
-              value={peer_reviewed}
+              value={issue}
             />
           </div>
 
+          <div className="form-group">
+            <label>Pages</label>
+            <input
+              className="form-control"
+              type="text"
+              name="pages"
+              onChange={this.onChange}
+              value={pages}
+            />
+          </div> </>):""}
+
+
+          {(group=="book"|| group=="publication")?(
+           <div className="form-group">
+           <label>DOI</label>
+           <input
+             className="form-control"
+             type="text"
+             name="DOI"
+             onChange={this.onChange}
+             value={DOI}
+           />
+           </div>):""}
+
+           {(group=="journal")?(  <> 
           <div className="form-group">
             <label>ISSN</label>
             <input
@@ -111,29 +193,109 @@ export class PaperForm extends Component {
               value={issn}
             />
           </div>
-        
-         <div className="form-group">
-            <label>Issue</label>
+    
+
+          <div className="form-group">
+            <label>Peer Reviewed</label>
             <input
               className="form-control"
               type="text"
-              name="issue"
+              name="peer_reviewed"
               onChange={this.onChange}
-              value={issue}
+              value={peer_reviewed}
+            />
+          </div></>):""
+    }
+
+    {(group=="book")?( <>
+       <div className="form-group">
+            <label>Edition</label>
+            <input
+              className="form-control"
+              type="text"
+              name="edition"
+              onChange={this.onChange}
+              value={edition}
+            />
+          </div>
+           <div className="form-group">
+            <label>ISBN</label>
+            <input
+              className="form-control"
+              type="text"
+              name="isbn"
+              onChange={this.onChange}
+              value={isbn}
+            />
+          </div>
+           <div className="form-group">
+            <label>Chapters</label>
+            <input
+              className="form-control"
+              type="text"
+              name="chapters"
+              onChange={this.onChange}
+              value={chapters}
+            />
+          </div>
+           <div className="form-group">
+            <label>Co-Authors</label>
+            <input
+              className="form-control"
+              type="text"
+              name="co_authors"
+              onChange={this.onChange}
+              value={co_authors}
             />
           </div>
           
-          <div className="form-group">
-            <label>Pages</label>
+          </>):""
+    }
+
+    {(group=="conference_article")?(
+    <>
+
+      <div className="form-group">
+            <label>Conference Name</label>
             <input
               className="form-control"
               type="text"
-              name="pages"
+              name="conference_name"
               onChange={this.onChange}
-              value={pages}
+              value={conference_name}
             />
           </div>
 
+      <div className="form-group">
+            <label>Conference Organised On</label>
+            <input
+              className="form-control"
+             type="date"
+              name="organised_date"
+              onChange={this.onChange}
+              value={organised_date}
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Conference Location</label>
+            <input
+              className="form-control"
+              type="text"
+              name="location"
+              onChange={this.onChange}
+              value={location}
+            />
+          </div>
+
+
+         
+    
+    </>):""}
+
+      
+
+          
           <div className="form-group">
             <label>Paper's Link</label>
             <input
@@ -155,17 +317,6 @@ export class PaperForm extends Component {
               value={publication_date}
             />
           </div>
-          
-          <div className="form-group">
-            <label>Description</label>
-            <textarea
-              className="form-control"
-              type="text"
-              name="description"
-              onChange={this.onChange}
-              value={description}
-            />
-          </div>
 
           <div className="form-group">
             <label>Status</label>
@@ -178,20 +329,9 @@ export class PaperForm extends Component {
             </select>
             </div>
             
-            <div className="form-group">
-            <label>Group</label>
-            <select className="form-control"
-                    onChange={this.onChange}
-                    name ="group">
-            <option value ="">---</option>
-            <option value="journal">Journal</option>
-            <option value="publication">Publication</option>
-            <option value="report">Report</option>
-            <option value="conference_article">Conference Article</option>
-            <option value="book">Book</option>
-            <option value="misc_paper">Miscellaneous Papers</option>
-            </select>
-            </div>
+          
+          
+
 
           <div className="form-group">
             <button type="submit" className="btn btn-primary">
@@ -203,5 +343,6 @@ export class PaperForm extends Component {
         )
     }
 }
+
 
 export default connect(null,{ addPapers })(PaperForm)

@@ -6,13 +6,14 @@ import { getPapers, deletePapers } from '../../actions/papers'
 
 export class Papers extends Component {
      static propTypes = {
+         user: PropTypes.object.isRequired,
          papers : PropTypes.array.isRequired,
          getPapers : PropTypes.func.isRequired,
          deletePapers : PropTypes.func.isRequired
      }
 
      componentDidMount(){
-         this.props.getPapers();
+         this.props.getPapers(this.props.id);
      }
 
 
@@ -35,7 +36,9 @@ export class Papers extends Component {
                                 <td>{paper.id}</td>
                                 <td>{paper.title}</td>
                                 <td>{paper.issue}</td>
-                                <td><button  className ="btn btn-danger btn-sm" onClick ={this.props.deletePapers.bind(this, paper.id)}>Delete</button></td>
+                                {(this.props.id == this.props.user.id)?
+                                (<td><button  className ="btn btn-danger btn-sm" onClick ={this.props.deletePapers.bind(this, paper.id)}>Delete</button></td>
+                                ):""}
                             </tr>
                         )) }  
                     </tbody>
@@ -46,6 +49,7 @@ export class Papers extends Component {
 }
 
 const mapStateToProps = state =>({
+    user: state.auth.user,
     papers: state.papers.papers
 })
 

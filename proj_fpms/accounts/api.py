@@ -5,16 +5,18 @@ from django.shortcuts import redirect, get_object_or_404
 from rest_framework import generics, permissions
 from rest_framework.response import Response
 from knox.models import AuthToken
-from .serializers import UserSerializer, LoginSerializer, RegisterSerializer
+from .serializers import UserSerializer, LoginSerializer, RegisterSerializer, ProfileSerializer
 from .utils import Util
 from django.urls import reverse
+from .custom_permissions import isTheSameUser
 
 
 class RegisterAPI(generics.GenericAPIView):
     serializer_class = RegisterSerializer
+
     authentication_classes = []
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request, format=None, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
@@ -68,6 +70,12 @@ class UserAPI(generics.RetrieveAPIView):
 
     def get_object(self):
         return self.request.user
+
+
+class GetUserAPI(generics.RetrieveAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 
 class VerifyEmail(generics.GenericAPIView):
