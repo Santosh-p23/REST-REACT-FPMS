@@ -29,6 +29,7 @@ class Paper(models.Model):
     status = models.CharField(max_length=10, choices=options)
     group = models.CharField(max_length=20, choices=category)
     description = models.CharField(max_length=500, null=True, blank=True)
+    authors = models.CharField(max_length=250, null=True, blank=True)
 
     # journals-specific
     volume = models.CharField(max_length=50, null=True, blank=True)
@@ -43,9 +44,8 @@ class Paper(models.Model):
     # books-specific DOI and volume
 
     edition = models.CharField(max_length=50, null=True, blank=True)
-    ISBN = models.CharField(max_length=50, null=True, blank=True)
+    isbn = models.CharField(max_length=50, null=True, blank=True)
     chapters = models.CharField(max_length=50, null=True, blank=True)
-    co_authors = models.CharField(max_length=250, null=True, blank=True)
 
     # conference_article-specific pages and issue
     conference_name = models.CharField(max_length=200, null=True, blank=True)

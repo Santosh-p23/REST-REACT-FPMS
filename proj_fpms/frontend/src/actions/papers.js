@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { createMessages, returnErrors } from './messages'
 
-import { GET_PAPERS, DELETE_PAPERS, ADD_PAPERS, SEARCH_PAPERS } from './types'
+import { GET_PAPERS, DELETE_PAPERS, ADD_PAPERS, SEARCH_PAPERS, GET_PAPER } from './types'
 
 import { tokenConfig } from './auth'
 
@@ -11,6 +11,17 @@ export const getPapers = (id) => (dispatch, getState) => {
         .then(res => {
             dispatch({
                 type: GET_PAPERS,
+                payload: res.data
+            });
+        })
+        .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
+}
+
+export const getPaper = (id) => (dispatch, getState) => {
+    axios.get(`/api/papers/${id}`, tokenConfig(getState))
+        .then(res => {
+            dispatch({
+                type: GET_PAPER,
                 payload: res.data
             });
         })

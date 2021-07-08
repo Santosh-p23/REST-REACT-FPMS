@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import {connect} from 'react-redux'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { getPapers, deletePapers } from '../../actions/papers'
 
@@ -22,26 +23,31 @@ export class Papers extends Component {
             <Fragment>
                 <h2>Papers</h2>
                 <table className="table table-striped">
-                    <thead>
+                <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>Date</th>
                             <th>Papers</th>
-                            <th>Issue</th>
+                            <th>Authors</th>
+                            <th>Publishers</th>
+                            <th>Class</th>
                         <th />
                     </tr>
                     </thead>
                     <tbody>
                         {this.props.papers.map((paper)=>(
                             <tr key ={paper.id}>
-                                <td>{paper.id}</td>
-                                <td>{paper.title}</td>
-                                <td>{paper.issue}</td>
+                                <td>{paper.publication_date}</td>
+                                <td><Link to={"/paper/" + paper.id} className ="">{paper.title}</Link></td>
+                                <td>{paper.authors}</td>
+                                <td>{paper.publisher}</td>
+                                <td>{paper.group}</td>
                                 {(this.props.id == this.props.user.id)?
-                                (<td><button  className ="btn btn-danger btn-sm" onClick ={this.props.deletePapers.bind(this, paper.id)}>Delete</button></td>
-                                ):""}
+                                 (<td><button  className ="btn btn-danger btn-sm" onClick ={this.props.deletePapers.bind(this, paper.id)}>Delete</button></td>
+                                 ):""}   
                             </tr>
                         )) }  
                     </tbody>
+                    
                 </table>
             </Fragment>
         )
@@ -54,3 +60,4 @@ const mapStateToProps = state =>({
 })
 
 export default connect(mapStateToProps,{getPapers, deletePapers})(Papers);
+

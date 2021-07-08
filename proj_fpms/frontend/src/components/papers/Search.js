@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import {Form, FormControl, Button} from 'react-bootstrap'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
+import {Link} from 'react-router-dom'
 import { searchPapers }  from '../../actions/papers'
 
 export class Search extends Component {
@@ -62,21 +63,22 @@ export class Search extends Component {
                 <table className="table table-striped">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>Date</th>
                             <th>Papers</th>
-                            <th>Issue</th>
+                            <th>Authors</th>
+                            <th>Publishers</th>
+                            <th>Class</th>
                         <th />
                     </tr>
                     </thead>
                     <tbody>
                         {this.props.papers.map((paper)=>(
                             <tr key ={paper.id}>
-                                <td>{paper.id}</td>
-                                <td>{paper.title}</td>
-                                <td>{paper.issue}</td>
-                                {(this.props.id == this.props.user.id)?
-                                (<td><button  className ="btn btn-danger btn-sm" onClick ={this.props.deletePapers.bind(this, paper.id)}>Delete</button></td>
-                                ):""}
+                                <td>{paper.publication_date}</td>
+                                <td><Link to={"/paper/" + paper.id} className ="">{paper.title}</Link></td>
+                                <td>{paper.authors}</td>
+                                <td>{paper.publisher}</td>
+                                <td>{paper.group}</td>
                             </tr>
                         )) }  
                     </tbody>

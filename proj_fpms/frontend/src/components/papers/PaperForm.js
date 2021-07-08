@@ -28,10 +28,10 @@ export class PaperForm extends Component {
       DOI:'',
 
       edition:'',
-      ISBN:'',
+      isbn:'',
 
       chapters:'',
-      co_authors:'',
+      authors:'',
 
       conference_name:'',
       location:'',
@@ -49,8 +49,8 @@ export class PaperForm extends Component {
 
     onSubmit =(e)=>{
         e.preventDefault();
-        const{ title, publisher, volume, peer_reviewed, issn, issue, pages,paper_link,publication_date  ,status, group, description , DOI, edition, isbn, chapters, co_authors, conference_name, location, organised_date} = this.state
-        const paper = { title, publisher, volume, peer_reviewed, issn, issue, pages,paper_link,publication_date  ,status, group, description , DOI, edition, isbn, chapters, co_authors, conference_name, location, organised_date}
+        const{ title, publisher, volume, peer_reviewed, issn, issue, pages,paper_link,publication_date  ,status, group, description , DOI, edition, isbn, chapters, authors, conference_name, location, organised_date} = this.state
+        const paper = { title, publisher, volume, peer_reviewed, issn, issue, pages,paper_link,publication_date  ,status, group, description , DOI, edition, isbn, chapters, authors, conference_name, location, organised_date}
         this.props.addPapers(paper)
         console.log(paper)
         this.setState({
@@ -70,7 +70,7 @@ export class PaperForm extends Component {
           isbn:'',
   
           chapters:'',
-          co_authors:'',
+          authors:'',
   
           conference_name:'',
           location:'',
@@ -79,7 +79,7 @@ export class PaperForm extends Component {
     }
     
     render() {
-        const{ title, publisher, volume, peer_reviewed, issn, issue, pages,paper_link,publication_date ,status,group, description , DOI, edition, isbn, chapters, co_authors, conference_name, location, organised_date} = this.state
+        const{ title, publisher, volume, peer_reviewed, issn, issue, pages,paper_link,publication_date ,status,group, description , DOI, edition, isbn, chapters, authors, conference_name, location, organised_date} = this.state
         return (
             <div className="card card-body mt-4 mb-4">
     
@@ -109,6 +109,16 @@ export class PaperForm extends Component {
               name="title"
               onChange={this.onChange}
               value={title}
+            />
+          </div>
+          <div className="form-group">
+            <label>Authors</label>
+            <input
+              className="form-control"
+              type="text"
+              name="authors"
+              onChange={this.onChange}
+              value={authors}
             />
           </div>
 
@@ -236,16 +246,6 @@ export class PaperForm extends Component {
               name="chapters"
               onChange={this.onChange}
               value={chapters}
-            />
-          </div>
-           <div className="form-group">
-            <label>Co-Authors</label>
-            <input
-              className="form-control"
-              type="text"
-              name="co_authors"
-              onChange={this.onChange}
-              value={co_authors}
             />
           </div>
           
