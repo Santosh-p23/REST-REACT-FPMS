@@ -112,7 +112,7 @@ export class PaperForm extends Component {
             />
           </div>
           <div className="form-group">
-            <label>Authors</label>
+            <label>Co-Authors</label>
             <input
               className="form-control"
               type="text"
