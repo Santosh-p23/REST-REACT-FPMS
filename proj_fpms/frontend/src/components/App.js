@@ -15,13 +15,14 @@ import Alerts from "./layout/Alerts";
 
 import Login from "./accounts/Login"
 import Register from "./accounts/Register"
-import Profile from "./accounts/Profile"
 import Search from './papers/Search.js'
 
 import PrivateRoute from "./common/PrivateRoute"
 
 import { loadUser} from '../actions/auth'
 import DetailPaper from './papers/DetailPaper.js'
+import DetailUser  from './papers/DetailUser'
+
 //Alerts
 const alertOptions ={
     timeout: 3000,
@@ -48,7 +49,8 @@ class App extends Component {
                     <Switch>
                         <PrivateRoute exact path ="/profile" component ={ DashBoard } />
                         <PrivateRoute exact path ="/" component ={ Search } />
-                        <PrivateRoute path ="/paper/:id" component ={ DetailPaper } />
+                        <PrivateRoute exact path ="/paper/:id" component ={ DetailPaper } />
+                        <Route exact path ="/user/:id" component = { DetailUser } />
                         <Route exact path ="/register" component ={ Register } />
                         <Route exact path ="/login" component ={ Login } />
                     

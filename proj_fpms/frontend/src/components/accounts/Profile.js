@@ -1,17 +1,6 @@
 import React, { Component } from 'react'
-import { Link , Redirect} from 'react-router-dom'
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 
 export class Profile extends Component {
-
-    static propTypes ={
-        user: PropTypes.object.isRequired
-
-    }
-
-
-
     render() {
         return (
     <div className ="container" >
@@ -31,10 +20,5 @@ export class Profile extends Component {
     </div>
         )
     }
-}
-const mapStateToProps = state =>({
-    user: state.auth.user
-  })
-  
-  
-  export default connect(mapStateToProps,{})(Profile)
+} 
+  export default Profile

@@ -1,7 +1,7 @@
 import { GET_PROFILE } from "../actions/types.js"
 
 const initialState = {
-    user: {}
+    profile: {}
 }
 
 export default function(state = initialState, action) {
@@ -10,7 +10,7 @@ export default function(state = initialState, action) {
         case GET_PROFILE:
             return {
                 ...state,
-                user: action.payload
+                profile: action.payload
             }
 
         default:

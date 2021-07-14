@@ -9,7 +9,7 @@ export default combineReducers({
     papers,
     errors,
     messages,
-    auth,
-    profiles
+    profiles,
+    auth
 
 });

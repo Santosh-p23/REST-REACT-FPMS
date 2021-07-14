@@ -16,7 +16,7 @@ export class DashBoard extends Component {
     render() {
         return (
             <div>
-                <Profile />
+                <Profile user ={this.props.user} />
                 <PaperForm />
                 <Papers id={this.props.user.id} />
                 
