@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {Link} from 'react-router-dom'
 import { searchPapers }  from '../../actions/papers'
+import { getProfile } from '../../actions/profiles'
 
 export class Search extends Component {
 
@@ -11,7 +12,8 @@ export class Search extends Component {
     static propTypes ={
         papers : PropTypes.array.isRequired,
         user: PropTypes.object.isRequired,
-        searchPapers: PropTypes.func.isRequired
+        searchPapers: PropTypes.func.isRequired,
+        getProfile: PropTypes.func.isRequired
 
       }
 
@@ -25,6 +27,11 @@ export class Search extends Component {
         [e.target.name] : e.target.value
         })
     }
+
+    
+    getUser = (id) => {
+        this.props.getProfile(id)
+      }
 
     onSubmit = (e)=>{
         e.preventDefault();
@@ -76,7 +83,7 @@ export class Search extends Component {
                             <tr key ={paper.id}>
                                 <td>{paper.publication_date}</td>
                                 <td><Link to={"/paper/" + paper.id} className ="">{paper.title}</Link></td>
-                                <td>{paper.authors}</td>
+                                <td><Link to={"/user/" + paper.author.id} onClick={() =>this.getUser(paper.author.id)} className ="">{paper.author.profile.full_name}</Link>, {paper.authors}</td>
                                 <td>{paper.publisher}</td>
                                 <td>{paper.group}</td>
                             </tr>
@@ -96,5 +103,5 @@ const mapStateToProps = state =>({
     user : state.auth.user
 })
 
-export default connect(mapStateToProps,{searchPapers})(Search);
+export default connect(mapStateToProps,{searchPapers, getProfile})(Search);
 
