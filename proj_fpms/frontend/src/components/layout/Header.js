@@ -40,10 +40,6 @@ export class Header extends Component {
      <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
     </NavDropdown> */}
  
-    <Form className="inline" >
-      <FormControl type="text" placeholder="Search" style={{}} className="ml-auto-sm-2" />
-    </Form>
-      <Button variant="outline-primary ">Search</Button>
 
      </Navbar.Collapse>
     </div>

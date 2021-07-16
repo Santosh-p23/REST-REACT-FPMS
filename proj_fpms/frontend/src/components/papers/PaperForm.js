@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import { addPapers } from '../../actions/papers';
+import  bibtexParse  from '@orcid/bibtex-parse-js'
 
 export class PaperForm extends Component {
     
@@ -35,8 +36,10 @@ export class PaperForm extends Component {
 
       conference_name:'',
       location:'',
-      organised_date: null
+      organised_date: null,
 
+      isBibtex:'Import from BibTex',
+      bibtext:''
 
     }
 
@@ -45,6 +48,37 @@ export class PaperForm extends Component {
         this.setState({
             [e.target.name]:e.target.value
         })
+    }
+
+    onBibtex =(e)=>{
+      this.setState({
+        isBibtex: ''
+      })
+    }
+
+    onSubmitBibtex =(e) =>{
+      e.preventDefault();
+
+      const sample = bibtexParse.toJSON(this.state.bibtext);
+
+      console.log(sample[0].entryTags);
+      const year = sample[0].entryTags.year+"-01-01"
+
+      this.setState({
+        title: sample[0].entryTags.title,
+        authors: sample[0].entryTags.author,
+        publisher: sample[0].entryTags.publisher ? sample[0].entryTags.publisher: (sample[0].entryTags.organization ? sample[0].entryTags.organization:""),
+        conference_name:sample[0].entryTags.booktitle ? sample[0].entryTags.booktitle :"",
+        volume:sample[0].entryTags.volume ? sample[0].entryTags.volume :"",
+        publication_date: year,
+        pages:sample[0].entryTags.pages ? sample[0].entryTags.pages :""
+
+
+
+      })
+
+      console.log(this.state.publisher)
+
     }
 
     onSubmit =(e)=>{
@@ -75,16 +109,49 @@ export class PaperForm extends Component {
           conference_name:'',
           location:'',
           organised_date:null
+          
         })
     }
     
     render() {
+
         const{ title, publisher, volume, peer_reviewed, issn, issue, pages,paper_link,publication_date ,status,group, description , DOI, edition, isbn, chapters, authors, conference_name, location, organised_date} = this.state
         return (
             <div className="card card-body mt-4 mb-4">
+
+          {(this.state.isBibtex=='')?(<div className="container">
+            <h3>Import from BibTex</h3>
+            <form className='my-3' onSubmit={this.onSubmitBibtex}>
+
+            <div className="form-group">
+            <label>Copy your BibTex here.</label>
+            <textarea
+              className="form-control"
+              type="text"
+              name="bibtext"
+              onChange={this.onChange}
+              value={this.state.bibtext}
+              />
+          </div>
+
+          <div className="form-group">
+            <button type="submit" className="btn btn-primary">
+              Import
+            </button>
+          </div>
+        </form>
+
+
+              </div>):(<div className="text-right" style={{textAlign:"right"}}>
+            <button type="button" onClick={this.onBibtex} className="btn btn-primary float-right"> {this.state.isBibtex}</button>
+            </div>)}
+ 
+
     
         <h2>Add Papers</h2>
         <form onSubmit={this.onSubmit}>
+
+        
 
         <div className="form-group">
             <label>Group</label>
@@ -256,7 +323,7 @@ export class PaperForm extends Component {
     <>
 
       <div className="form-group">
-            <label>Conference Name</label>
+            <label>Conference</label>
             <input
               className="form-control"
               type="text"
