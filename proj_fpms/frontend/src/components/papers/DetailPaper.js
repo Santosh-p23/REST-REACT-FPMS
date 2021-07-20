@@ -34,7 +34,8 @@ export class DetailPaper extends Component {
             })
             } */}
              <div className="card card-body mt-4 mb-4"> 
-            <p>Authors: {this.props.author + 'and' + this.props.paper.authors}</p><br />
+			 {(this.props.paper.author)?(<div>
+			 <p>Authors: {this.props.paper.author.profile.full_name + ' and ' + this.props.paper.authors}</p><br /> </div>):""}
             <p>Publication Date:{' ' + this.props.paper.publication_date}</p><br/>
             <p>Publisher:{' ' + this.props.paper.publisher}</p>
             {(this.props.paper.conference)?<p><br />Conference:{' ' +this.props.paper.conference_name + ", " +this.props.paper.location }</p>:""}
