@@ -1,23 +1,39 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Link , Redirect} from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 export class Profile extends Component {
-    render() {
-        return (
 
+    static propTypes = {
+        user: PropTypes.object.isRequired,
+    }
+
+
+
+    render() {
+
+        return (
         <div className="content-section">
             <div className='media mt-2'>
                 <img className ="rounded-circle account-img" src ={this.props.user.profile.image} />
                  <div className ='media-body'>
-                    <h3 className ="account-heading">{this.props.user.profile.full_name}</h3>
-                    <h5 className ="text-secondary">{this.props.user.profile.about_me}</h5>
-                    <h5 className ="text-secondary">{this.props.user.profile.institute}</h5>
-                    <h5 className ="text-secondary">{this.props.user.profile.address}</h5>
-                   
+                    <h4 className ="account-heading">{this.props.user.profile.full_name}</h4>
+                    <h6 className ="text-secondary">{this.props.user.profile.about_me}</h6>
+                    <h6 className ="text-secondary">{this.props.user.profile.institute}</h6>
+                    <h6 className ="text-secondary">{this.props.user.profile.address}</h6>
 
                 </div>
-           </div>        
+           </div> 
+           {(this.props.user.id == this.props.owner.id)?
+                                 (<button  className ="btn btn-secondary btn-sm"><Link to="/papers">Export Papers</Link></button>
+                                 ):""}          
         </div>
         )
     }
 } 
-  export default Profile
+const mapStateToProps = state =>({
+    owner: state.auth.user,
+})
+
+export default connect(mapStateToProps,{})(Profile);

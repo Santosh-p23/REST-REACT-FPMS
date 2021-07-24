@@ -18,6 +18,7 @@ export class DetailPaper extends Component {
     }
 
     render() {
+        // const paper = (this.props.paper)? this.props.paper:{}
         return (
             <div className ="container">
                 <div className="card card-body my-4 mx-auto"  style={{maxWidth:'800px'}}>
@@ -50,7 +51,7 @@ export class DetailPaper extends Component {
                 <td>Publisher</td>
                 <td>{this.props.paper.publisher}</td>
             </tr>
-            {(this.props.paper.conference)?<tr>
+            {(this.props.paper.conference_name)?<tr>
                 <td>Conference</td>
                 <td>{this.props.paper.conference_name + ", " +this.props.paper.location }</td>
                 </tr>:""}
@@ -94,6 +95,17 @@ export class DetailPaper extends Component {
                 <td>Peer Reviewed</td>
                 <td>{this.props.paper.peer_reviewed}</td>
                 </tr>:""}
+            <tr>
+                <td>MLA</td>
+                <td>
+                    { (this.props.paper.author)? this.props.paper.author.profile.full_name.split(" ").reverse().join(", "): ""}
+                    {this.props.paper.authors ? ((this.props.paper.authors.split("and").length<3)?" and " + this.props.paper.authors:", et al."):""}{" "}
+                            "{this.props.paper.title}."{" "} <span className="fst-italic">
+                        {(this.props.paper.conference_name)? this.props.paper.conference_name+".":""}</span>{" "}
+                        {this.props.paper.publisher}{", "}{this.props.paper.location}{" "}
+                        {this.props.paper.publication_date ? this.props.paper.publication_date.split("-")[0]:""}
+                        </td>
+            </tr>
             {(this.props.paper.paper_link)?<tr><a href ={this.props.paper.paper_link}>{this.props.paper.paper_link}</a></tr>:""}
             </tbody>
             </table>

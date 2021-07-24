@@ -18,7 +18,7 @@ export default function(state = initialState, action) {
         case GET_PAPERS:
             return {
                 ...state,
-                paper: [],
+                paper: {},
                 papers: action.payload
             }
 

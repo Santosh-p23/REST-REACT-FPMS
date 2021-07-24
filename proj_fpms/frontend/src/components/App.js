@@ -22,6 +22,7 @@ import PrivateRoute from "./common/PrivateRoute"
 
 import { loadUser} from '../actions/auth'
 import DetailPaper from './papers/DetailPaper.js'
+import PaperList from './papers/PaperList.js'
 import DetailUser  from './papers/DetailUser'
 
 
@@ -50,6 +51,7 @@ class App extends Component {
                 <Header />
                     <Switch>
                         <PrivateRoute exact path ="/profile" component ={ DashBoard } />
+                        <PrivateRoute exact path ="/papers"s component ={ PaperList } />
                         <PrivateRoute exact path ="/" component ={ Search } />
                         <PrivateRoute exact path ="/paper/:id" component ={ DetailPaper } />
                         <PrivateRoute exact path ="/user/:id" component = { DetailUser } />

@@ -44,7 +44,7 @@ export class Search extends Component {
 
     render() {
         return (
-            <div class="container mt-4">
+            <div className="container mt-4">
          <form onSubmit={this.onSubmit}>
           <h3 className="text-center">Paper Search</h3>
          <div className="input-group mx-auto" style={{maxWidth:'500px'}}>
