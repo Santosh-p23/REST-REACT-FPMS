@@ -12,6 +12,7 @@ class User(AbstractUser):
         unique=True,
     )
     registerToken = models.CharField(max_length=255, null=True)
+    otp = models.CharField(max_length = 255, null =True)
 
 
 # User._meta.get_field('email').null = False

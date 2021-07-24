@@ -15,6 +15,7 @@ import Alerts from "./layout/Alerts";
 
 import Login from "./accounts/Login"
 import Register from "./accounts/Register"
+import PasswordReset from "./accounts/PasswordReset"
 import Search from './papers/Search.js'
 
 import PrivateRoute from "./common/PrivateRoute"
@@ -22,6 +23,7 @@ import PrivateRoute from "./common/PrivateRoute"
 import { loadUser} from '../actions/auth'
 import DetailPaper from './papers/DetailPaper.js'
 import DetailUser  from './papers/DetailUser'
+
 
 //Alerts
 const alertOptions ={
@@ -50,9 +52,10 @@ class App extends Component {
                         <PrivateRoute exact path ="/profile" component ={ DashBoard } />
                         <PrivateRoute exact path ="/" component ={ Search } />
                         <PrivateRoute exact path ="/paper/:id" component ={ DetailPaper } />
-                        <Route exact path ="/user/:id" component = { DetailUser } />
+                        <PrivateRoute exact path ="/user/:id" component = { DetailUser } />
                         <Route exact path ="/register" component ={ Register } />
                         <Route exact path ="/login" component ={ Login } />
+                        <Route exact path ="/password-reset" component ={ PasswordReset } />
                     
                     </Switch>
                 </div>

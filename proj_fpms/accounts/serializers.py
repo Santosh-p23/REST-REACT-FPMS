@@ -64,3 +64,26 @@ class LoginSerializer(serializers.Serializer):
         if user and user.is_active:
             return user
         raise serializers.ValidationError("Invalid Credentials")
+
+
+class ResetPassSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+
+    def validate(self, data):
+        user = User.objects.get(email = data['email'])
+        if user and user.is_active:
+            return user
+        raise serializers.ValidationError("Invalid Credentials")
+
+
+
+class PassChangeSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    otp = serializers.CharField()
+    newPass = serializers.CharField()
+
+    def validate(self, data):
+        user = User.objects.get(username = data['username'])
+        if user and user == User.objects.get(otp = data['otp']):
+            return user
+        raise serializers.ValidationError("Invalid Credentials")

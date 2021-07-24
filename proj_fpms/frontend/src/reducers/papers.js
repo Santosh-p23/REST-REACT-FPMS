@@ -2,6 +2,7 @@ import { GET_PAPERS, DELETE_PAPERS, ADD_PAPERS, SEARCH_PAPERS, GET_PAPER } from 
 
 const initialState = {
     papers: [],
+    search_results: [],
     paper: {}
 }
 
@@ -40,7 +41,7 @@ export default function(state = initialState, action) {
         case SEARCH_PAPERS:
             return {
                 ...state,
-                papers: action.payload
+                search_results: action.payload
             }
 
         default:

@@ -20,8 +20,8 @@ class PaperViewSet(viewsets.ModelViewSet):
     ordering = ['-publication_date']
 
     filter_backends = [filters.SearchFilter]
-    search_fields = ['title', 'author__profile__full_name', 'group']
-
+    search_fields = ['title', 'author__profile__full_name','authors','group']
+    
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
@@ -43,5 +43,5 @@ class SearchView(generics.ListAPIView):
     serializer_class = PaperSerializer
     permission_classes = [permissions.IsAuthenticated]
     filter_backends = [filters.SearchFilter]
-    search_fields = ['title', 'author__profile__full_name', 'group']
+    search_fields = ['title', 'author__profile__full_name','authors', 'group']
     ordering = ['-publication_date']

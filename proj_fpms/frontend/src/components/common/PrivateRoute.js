@@ -6,8 +6,9 @@ import{connect} from "react-redux"
 import {Spinner} from "react-bootstrap"
 
 const PrivateRoute = ({component: Component, auth, ...rest}) => (
-        <Route { ...rest }
-        render ={props =>{
+        <Route 
+        { ...rest }
+        render ={ (props) =>{
             if(auth.isLoading){
                return( <Spinner animation="border" variant="info" />)
             }
@@ -26,3 +27,4 @@ const mapStateToProps = state =>({
 })
 
 export default connect(mapStateToProps)(PrivateRoute)
+

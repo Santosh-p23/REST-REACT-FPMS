@@ -27,15 +27,16 @@ export class Papers extends Component {
     render() {
         return (
             <Fragment>
-                <h2>Papers</h2>
-                <table className="table table-striped">
+                <h2 className="mt-3">Papers</h2>
+                <div className="table-responsive">
+                <table className="table table-striped table-hover table-sm">
                 <thead>
                         <tr>
                             <th>Date</th>
                             <th>Papers</th>
                             <th>Authors</th>
-                            <th>Publishers</th>
-                            <th>Class</th>
+                            {/* <th>Publishers</th>
+                            <th>Class</th> */}
                         <th />
                     </tr>
                     </thead>
@@ -45,8 +46,8 @@ export class Papers extends Component {
                                 <td>{paper.publication_date}</td>
                                 <td><Link to={"/paper/" + paper.id} className ="">{paper.title}</Link></td>
                                 <td><Link to={"/user/" + paper.author.id} onClick={() =>this.getUser(paper.author.id)} className ="">{paper.author.profile.full_name}</Link> and {paper.authors}</td>
-                                <td>{paper.publisher}</td>
-                                <td>{paper.group}</td>
+                                {/* <td >{paper.publisher}</td>
+                                <td>{paper.group}</td> */}
                                 {(this.props.id == this.props.user.id)?
                                  (<td><button  className ="btn btn-danger btn-sm" onClick ={this.props.deletePapers.bind(this, paper.id)}>Delete</button></td>
                                  ):""}   
@@ -55,6 +56,7 @@ export class Papers extends Component {
                     </tbody>
                     
                 </table>
+                </div>
             </Fragment>
         )
     }

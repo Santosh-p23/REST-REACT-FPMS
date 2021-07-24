@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { returnErrors } from './messages';
+import { returnErrors, createMessages } from './messages';
 
 import {
     USER_LOADED,
@@ -10,6 +10,9 @@ import {
     LOGOUT_SUCCESS,
     REGISTER_FAIL,
     REGISTER_SUCCESS,
+    PASSWORD_RESET,
+    RESET_FAIL,
+    PASSWORD_RESET_CONFIRM
 } from './types'
 
 
@@ -103,6 +106,62 @@ export const register = ({ username, password, email, profile }) => (dispatch) =
         });
 };
 
+
+
+
+export const resetPassword = (email) => (dispatch) => {
+
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+    const body = JSON.stringify({ email });
+
+
+    axios.post('/api/auth/reset-pass', body, config)
+        .then(res => {
+            dispatch(createMessages({ otpSent: "OTP sent to your email." }))
+            dispatch({
+                type: PASSWORD_RESET,
+                payload: res.data
+            })
+        }).catch(err => {
+            dispatch(returnErrors(err.response.data, err.response.status))
+            dispatch({
+                type: RESET_FAIL,
+                payload: err.response.data
+            })
+        })
+
+}
+
+export const resetConfirm = (username, otp, newPass) => (dispatch) => {
+
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+    const body = JSON.stringify({ username, otp, newPass });
+    console.log(body)
+
+    axios.post('/api/auth/resetpassconfirm', body, config)
+        .then(res => {
+            dispatch(createMessages({ passwordReset: "Your password has been reset." }))
+            dispatch({
+                type: PASSWORD_RESET_CONFIRM,
+                payload: res.data
+            })
+        }).catch(err => {
+            dispatch(returnErrors(err.response.data, err.response.status))
+            dispatch({
+                type: RESET_FAIL,
+                payload: err.response.data
+            })
+        })
+
+}
 
 export const tokenConfig = (getState) => {
 

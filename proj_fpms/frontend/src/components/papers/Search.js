@@ -44,54 +44,45 @@ export class Search extends Component {
 
     render() {
         return (
-            <div>
+            <div class="container mt-4">
          <form onSubmit={this.onSubmit}>
-         <div className="form-group">
-            <label>What do you seek ?</label>
+          <h3 className="text-center">Paper Search</h3>
+         <div className="input-group mx-auto" style={{maxWidth:'500px'}}>
             <input
               className="form-control"
               type="text"
               name="search"
+              placeholder="Search for..."
               onChange={this.onChange}
               value={this.state.search}
             />
-          </div>
-          <div className="form-group">
-            <button type="submit" className="btn btn-primary">
-              Submit
+      
+          <span className="input-group-btn ms-1" >
+          <button type="submit" className="btn btn-primary">
+              Search
             </button>
+          </span>
           </div>
           </form>
 
 
-            {(this.state.result)?(
+
+
+
                 <Fragment>
-                <h2>Papers</h2>
-                <table className="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Papers</th>
-                            <th>Authors</th>
-                            <th>Publishers</th>
-                            <th>Class</th>
-                        <th />
-                    </tr>
-                    </thead>
+                <table className="table table-striped table-hover mt-5">
                     <tbody>
                         {this.props.papers.map((paper)=>(
                             <tr key ={paper.id}>
                                 <td>{paper.publication_date}</td>
                                 <td><Link to={"/paper/" + paper.id} className ="">{paper.title}</Link></td>
                                 <td><Link to={"/user/" + paper.author.id} onClick={() =>this.getUser(paper.author.id)} className ="">{paper.author.profile.full_name}</Link>, {paper.authors}</td>
-                                <td>{paper.publisher}</td>
-                                <td>{paper.group}</td>
+
                             </tr>
                         )) }  
                     </tbody>
                 </table>
             </Fragment>
-            ):"If into the records you go, only papers will you find."}
 
             </div>
         )
@@ -99,7 +90,7 @@ export class Search extends Component {
 }
 
 const mapStateToProps = state =>({
-    papers: state.papers.papers,
+    papers: state.papers.search_results,
     user : state.auth.user
 })
 

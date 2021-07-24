@@ -19,10 +19,10 @@ export class DetailPaper extends Component {
 
     render() {
         return (
-           
-                <div className="jumbotron">
-                <h3 className="display-4">{this.props.paper.title}</h3>
-                <hr className="my-4" />
+            <div className ="container">
+                <div className="card card-body my-4 mx-auto"  style={{maxWidth:'800px'}}>
+                <h3>{this.props.paper.title}</h3>
+                <hr className="my-2" />
                
                 {/* {
             Object.keys(this.props.paper).map((key, i) => {
@@ -33,32 +33,74 @@ export class DetailPaper extends Component {
              </p>):""
             })
             } */}
-             <div className="card card-body mt-4 mb-4"> 
-			 {(this.props.paper.author)?(<div>
-			 <p>Authors: {this.props.paper.author.profile.full_name + ' and ' + this.props.paper.authors}</p><br /> </div>):""}
-            <p>Publication Date:{' ' + this.props.paper.publication_date}</p><br/>
-            <p>Publisher:{' ' + this.props.paper.publisher}</p>
-            {(this.props.paper.conference)?<p><br />Conference:{' ' +this.props.paper.conference_name + ", " +this.props.paper.location }</p>:""}
-            {(this.props.paper.description)?<p><br />Description:{' '+this.props.paper.description}</p>:""}
-            {(this.props.paper.volume)?<p><br />Volume:{' '+this.props.paper.volume}</p>:""}
-            {(this.props.paper.pages)?<p><br />Pages:{' '+this.props.paper.pages}</p>:""}
-            {(this.props.paper.issue)?<p><br />Issue:{' '+this.props.paper.issue}</p>:""}
-            {(this.props.paper.issn)?<p><br />ISSN:{' '+this.props.paper.issn}</p>:""}
-            {(this.props.paper.isbn)?<p><br />ISSN:{' '+ this.props.paper.ibsn}</p>:""}
-            {(this.props.paper.edition)?<p><br />Edition:{' '+this.props.paper.edition}</p>:""}
-            {(this.props.paper.chapters)?<p><br />Chapters:{' '+this.props.paper.chapters}</p>:""}
-            {(this.props.paper.DOI)?<p ><br />DOI:{' '+ this.props.paper.DOI}</p>:""}
-            {(this.props.paper.peer_reviewed)?<p><br />Peer Reviewed:{' '+this.props.paper.peer_reviewed}</p>:""}
-            <p><a href ={this.props.paper.paper_link}>{this.props.paper.paper_link}</a></p> <br/>
-             </div>
-            
-            
-
-
-
-
-              
+             <div className="card card-body mt-4 mb-3" > 
+             <div className ="table-responsive">
+             <table className="table table-light table-hover table-striped">
+                 <tbody>
+			 {(this.props.paper.author)?(
+                 <tr>
+                <td>Authors</td>
+                <td>{this.props.paper.author.profile.full_name + ' and ' + this.props.paper.authors}</td>
+                </tr>):""}
+            <tr>
+                <td>Publication Date</td> 
+                <td>{this.props.paper.publication_date}</td>
+            </tr>
+            <tr>
+                <td>Publisher</td>
+                <td>{this.props.paper.publisher}</td>
+            </tr>
+            {(this.props.paper.conference)?<tr>
+                <td>Conference</td>
+                <td>{this.props.paper.conference_name + ", " +this.props.paper.location }</td>
+                </tr>:""}
+            {(this.props.paper.description)?<tr>
+                <td>Description</td>
+                <td>{this.props.paper.description}</td>
+                </tr>:""}
+            {(this.props.paper.volume)?<tr>
+                <td>Volume</td>
+                <td>{this.props.paper.volume}</td>
+                </tr>:""}
+            {(this.props.paper.pages)?<tr>
+                <td>Pages</td>
+                <td>{this.props.paper.pages}</td>
+                </tr>:""}
+            {(this.props.paper.issue)?<tr>
+                <td>Issue</td>
+                <td>{this.props.paper.issue}</td>
+                </tr>:""}
+            {(this.props.paper.issn)?<tr>
+                <td>ISSN</td>
+                <td>{this.props.paper.issn}</td>
+                </tr>:""}
+            {(this.props.paper.isbn)?<tr>
+                <td>ISSN</td>
+                <td>{this.props.paper.ibsn}</td>
+                </tr>:""}
+            {(this.props.paper.edition)?<tr>
+                <td>Edition</td>
+                <td>{this.props.paper.edition}</td>
+                </tr>:""}
+            {(this.props.paper.chapters)?<tr>
+                <td>Chapters</td>
+                <td>{this.props.paper.chapters}</td>
+                </tr>:""}
+            {(this.props.paper.DOI)?<tr>
+                <td>DOI</td>
+                <td>{this.props.paper.DOI}</td>
+                </tr>:""}
+            {(this.props.paper.peer_reviewed)?<tr>
+                <td>Peer Reviewed</td>
+                <td>{this.props.paper.peer_reviewed}</td>
+                </tr>:""}
+            {(this.props.paper.paper_link)?<tr><a href ={this.props.paper.paper_link}>{this.props.paper.paper_link}</a></tr>:""}
+            </tbody>
+            </table>
+             </div>  
             </div>
+            </div>
+</div>
             
         )
     }
