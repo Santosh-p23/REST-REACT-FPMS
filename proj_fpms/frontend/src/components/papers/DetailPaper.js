@@ -76,8 +76,8 @@ export class DetailPaper extends Component {
                 <td>{this.props.paper.issn}</td>
                 </tr>:""}
             {(this.props.paper.isbn)?<tr>
-                <td>ISSN</td>
-                <td>{this.props.paper.ibsn}</td>
+                <td>ISBN</td>
+                <td>{this.props.paper.isbn}</td>
                 </tr>:""}
             {(this.props.paper.edition)?<tr>
                 <td>Edition</td>

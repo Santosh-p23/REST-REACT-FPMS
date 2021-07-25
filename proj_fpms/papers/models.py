@@ -28,7 +28,7 @@ class Paper(models.Model):
     paper_link = models.CharField(max_length=250, null=True, blank=True)
     status = models.CharField(max_length=10, choices=options)
     group = models.CharField(max_length=20, choices=category)
-    description = models.CharField(max_length=500, null=True, blank=True)
+    description = models.CharField(max_length=1000, null=True, blank=True)
     authors = models.CharField(max_length=250, null=True, blank=True)
 
     # journals-specific

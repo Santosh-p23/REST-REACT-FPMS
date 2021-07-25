@@ -27,7 +27,7 @@ export class Papers extends Component {
     render() {
         return (
             <Fragment>
-                <h2 className="mt-3">Papers</h2>
+                <h2 className="mt-3">Publications</h2>
                 <div className="table-responsive">
                 <table className="table table-striped table-hover table-sm">
                 <thead>

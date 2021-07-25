@@ -108,7 +108,8 @@ export class PaperForm extends Component {
   
           conference_name:'',
           location:'',
-          organised_date:null
+          organised_date:null,
+          bibtext: ""
           
         })
     }

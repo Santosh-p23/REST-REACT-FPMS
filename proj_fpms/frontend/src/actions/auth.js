@@ -93,6 +93,7 @@ export const register = ({ username, password, email, profile }) => (dispatch) =
     axios
         .post('/api/auth/register', body, config)
         .then((res) => {
+            dispatch(createMessages({ verifyEmail: 'Please verify your email.' }));
             dispatch({
                 type: REGISTER_SUCCESS,
                 payload: res.data,
