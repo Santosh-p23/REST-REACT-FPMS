@@ -24,14 +24,14 @@ export class PaperList extends Component {
             <Fragment>
 
                 <h4 className="mt-3">Publications & Appearances</h4>
-                <p class="fw-light">{this.props.user.profile.full_name}</p>
+                <p className="fw-light">{this.props.user.profile.full_name}</p>
                 <div className="table-responsive">
                 <table className="table table-sm">
                     <tbody>
                         {this.props.papers.map((paper)=>(
                             <tr key ={paper.id}>
                                 <td>
-                                {author}{(paper.authors.split("and").length<3)?" and " + paper.authors:", et al."}{" "}
+                                {author}{(paper.authors !=="")?((paper.authors.split("and").length<3)?" and " + paper.authors:", et al."):""}{" "}
                                 "{paper.title}."{" "} <span className="fst-italic">{(paper.conference_name)? paper.conference_name+".":""}</span>{" "}
                                 {paper.publisher}{", "}{paper.location}{" "}{paper.publication_date.split("-")[0]}
                                 </td>

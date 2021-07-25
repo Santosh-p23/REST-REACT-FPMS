@@ -76,7 +76,8 @@ export class Search extends Component {
                             <tr key ={paper.id}>
                                 <td>{paper.publication_date}</td>
                                 <td><Link to={"/paper/" + paper.id} className ="">{paper.title}</Link></td>
-                                <td><Link to={"/user/" + paper.author.id} onClick={() =>this.getUser(paper.author.id)} className ="">{paper.author.profile.full_name}</Link>, {paper.authors}</td>
+                                <td><Link to={"/user/" + paper.author.id} onClick={() =>this.getUser(paper.author.id)} className ="">{paper.author.profile.full_name}</Link>
+                                    {(paper.authors !== "")? " and " + paper.authors:""}</td>
 
                             </tr>
                         )) }  
