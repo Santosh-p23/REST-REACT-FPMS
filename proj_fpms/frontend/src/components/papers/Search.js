@@ -3,7 +3,7 @@ import {Form, FormControl, Button} from 'react-bootstrap'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {Link} from 'react-router-dom'
-import { searchPapers }  from '../../actions/papers'
+import { searchPapers, searchPapersAuthors, searchPapersTitle }  from '../../actions/papers'
 import { getProfile } from '../../actions/profiles'
 
 export class Search extends Component {
@@ -13,16 +13,25 @@ export class Search extends Component {
         papers : PropTypes.array.isRequired,
         user: PropTypes.object.isRequired,
         searchPapers: PropTypes.func.isRequired,
+        searchPapersAuthors: PropTypes.func.isRequired,
+        searchPapersTitle: PropTypes.func.isRequired,
         getProfile: PropTypes.func.isRequired
 
       }
 
     state ={
         search:"", 
+        searchTitle: false,
+        searchAuthors: false,
+
         result:false
     }
 
     onChange=(e)=>{
+        (e.target.type === "checkbox") ?
+        this.setState({
+            [e.target.name] : e.target.checked
+        }):
         this.setState({
         [e.target.name] : e.target.value
         })
@@ -38,13 +47,25 @@ export class Search extends Component {
         this.setState({
             result: true
         })
-        this.props.searchPapers(this.state.search)
+        if (this.state.searchAuthors && !this.state.searchTitle){
+            this.props.searchPapersAuthors(this.state.search)
+        }
+
+        else if (this.state.searchTitle && !this.state.searchAuthors){
+            this.props.searchPapersTitle(this.state.search)
+        }
+
+        else
+        {
+            this.props.searchPapers(this.state.search)
+        }
+       
     }
 
 
     render() {
         return (
-            <div className="container mt-4">
+            <div className="container mt-4" >
          <form onSubmit={this.onSubmit}>
           <h3 className="text-center">Paper Search</h3>
          <div className="input-group mx-auto" style={{maxWidth:'500px'}}>
@@ -57,13 +78,35 @@ export class Search extends Component {
               value={this.state.search}
             />
       
-          <span className="input-group-btn ms-1" >
+          <span className="input-group-btn" >
           <button type="submit" className="btn btn-primary">
-              Search
+          <i className="fa fa-search" aria-hidden="true"></i>
             </button>
           </span>
           </div>
+
+          <div className="text-center mt-2">
+            <label className="">
+            <input 
+                className="form-check-input" 
+                type="checkbox" 
+                name ="searchAuthors" 
+                checked ={this.state.searchAuthors}
+                onChange ={this.onChange} /> Authors
+            </label> 
+            <label className ="ms-4">
+            <input 
+                className="form-check-input" 
+                type="checkbox" 
+                name ="searchTitle" 
+                checked ={this.state.searchTitle}
+                onChange ={this.onChange} /> Title
+            </label>  
+
+        </div>
+
           </form>
+          
 
 
 
@@ -95,5 +138,5 @@ const mapStateToProps = state =>({
     user : state.auth.user
 })
 
-export default connect(mapStateToProps,{searchPapers, getProfile})(Search);
+export default connect(mapStateToProps,{searchPapers, getProfile, searchPapersAuthors, searchPapersTitle})(Search);
 

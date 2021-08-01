@@ -45,3 +45,19 @@ class SearchView(generics.ListAPIView):
     filter_backends = [filters.SearchFilter]
     search_fields = ['title', 'author__profile__full_name','authors', 'group']
     ordering = ['-publication_date']
+
+
+class SearchViewTitle(generics.ListAPIView):
+    queryset = Paper.postobjects.all()
+    serializer_class = PaperSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['title']
+    ordering = ['-publication_date']
+
+class SearchViewAuthors(generics.ListAPIView):
+    queryset = Paper.postobjects.all()
+    serializer_class = PaperSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['author__profile__full_name',"authors"]
+    ordering = ['-publication_date']
+

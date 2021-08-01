@@ -50,7 +50,7 @@ export class Papers extends Component {
                                 {/* <td >{paper.publisher}</td>
                                 <td>{paper.group}</td> */}
                                 {(this.props.id == this.props.user.id)?
-                                 (<td><button  className ="btn btn-danger btn-sm" onClick ={this.props.deletePapers.bind(this, paper.id)}>Delete</button></td>
+                                 (<td><button  className ="btn btn-danger btn-sm" onClick ={this.props.deletePapers.bind(this, paper.id)}><i className="fas fa-trash-alt"></i></button></td>
                                  ):""}   
                             </tr>
                         )) }  

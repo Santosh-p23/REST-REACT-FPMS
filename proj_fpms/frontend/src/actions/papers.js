@@ -41,6 +41,29 @@ export const searchPapers = (value) => (dispatch, getState) => {
         .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 }
 
+export const searchPapersAuthors = (value) => (dispatch, getState) => {
+    axios.get(`/api/search/authors/?search=${value}`, tokenConfig(getState))
+        .then(res => {
+            dispatch({
+                type: SEARCH_PAPERS,
+                payload: res.data
+            });
+        })
+        .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
+}
+
+export const searchPapersTitle = (value) => (dispatch, getState) => {
+    axios.get(`/api/search/title/?search=${value}`, tokenConfig(getState))
+        .then(res => {
+            dispatch({
+                type: SEARCH_PAPERS,
+                payload: res.data
+            });
+        })
+        .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
+}
+
+
 
 // export const getPapers = () => (dispatch, getState) => {
 //     axios.get(`/api/papers/`, tokenConfig(getState))

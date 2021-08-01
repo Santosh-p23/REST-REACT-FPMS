@@ -44,7 +44,6 @@ export class Register extends Component {
 
           };
           this.props.register(newUser);
-          this.props.createMessages({ verifyEmail: 'Please verify your email.' });
           this.setState({
               registered: true
           })

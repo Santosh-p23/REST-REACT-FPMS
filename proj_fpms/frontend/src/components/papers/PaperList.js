@@ -15,6 +15,9 @@ export class PaperList extends Component {
     //     this.props.getPapers(this.props.user.id);
     //  }
 
+    handleClick=()=>{
+        print()
+    }
 
     render() {
         const author= this.props.user.profile.full_name.split(" ").reverse().join(", ")
@@ -24,6 +27,10 @@ export class PaperList extends Component {
             <Fragment>
 
                 <h4 className="mt-3">Publications & Appearances</h4>
+                <div className="text-right" style={{textAlign:"right"}}>
+                <button className ="btn btn-success ms-auto d-print-none" onClick={this.handleClick}>
+                <i className="fa fa-print" aria-hidden="true"></i>
+                </button></div>
                 <p className="fw-light">{this.props.user.profile.full_name}</p>
                 <div className="table-responsive">
                 <table className="table table-sm">

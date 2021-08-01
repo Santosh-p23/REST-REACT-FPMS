@@ -26,7 +26,7 @@ export class Profile extends Component {
                 </div>
            </div> 
            {(this.props.user.id == this.props.owner.id)?
-                                 (<button  className ="btn btn-secondary btn-sm"><Link to="/papers">Export Papers</Link></button>
+                                 (<Link to="/papers">Export Papers</Link>
                                  ):""}          
         </div>
         )
