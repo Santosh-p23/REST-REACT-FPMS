@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import PaperForm from './PaperForm'
@@ -16,17 +16,17 @@ export class DashBoard extends Component {
     render() {
         return (
             <div>
-                <Profile user ={this.props.user} />
+                <Profile user={this.props.user} />
                 <PaperForm />
                 <Papers id={this.props.user.id} />
-                
+
             </div>
         )
     }
 }
 
-const mapStateToProps = state =>({
+const mapStateToProps = state => ({
     user: state.auth.user,
 })
 
-export default connect(mapStateToProps,{})(DashBoard);
+export default connect(mapStateToProps, {})(DashBoard);

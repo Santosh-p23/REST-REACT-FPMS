@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import Papers from './Papers'
@@ -8,29 +8,29 @@ import { Fragment } from 'react'
 
 class DetailUser extends Component {
 
-    static propTypes ={
+    static propTypes = {
         user: PropTypes.object.isRequired,
 
     }
-    
+
 
 
     render() {
-       
-      
+
+
         return (
             <div>
-              
 
-                {(this.props.user.id != null && this.props.user.profile != null)?
-                <Fragment>
-                 <Profile user= {this.props.user} />
-                 <Papers id= {this.props.match.params.id} />
-                </Fragment>
-                 :""}
 
-                  
-                
+                {(this.props.user.id != null && this.props.user.profile != null) ?
+                    <Fragment>
+                        <Profile user={this.props.user} />
+                        <Papers id={this.props.match.params.id} />
+                    </Fragment>
+                    : ""}
+
+
+
             </div>
         )
     }
@@ -39,12 +39,12 @@ class DetailUser extends Component {
 }
 
 
-const mapStateToProps = state =>({
+const mapStateToProps = state => ({
     user: state.profiles.profile,
     // user:state.auth.user
-  })
-  
-  
+})
+
+
 export default connect(mapStateToProps, {})(DetailUser)
 
 
