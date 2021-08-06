@@ -96,6 +96,7 @@ class VerifyEmail(generics.GenericAPIView):
         print(token)
         print(user)
         user.is_active = True
+        user.registerToken = "".join(choice(characters) for x in range(randint(8, 16)))
         user.save()
         return redirect('/')
 

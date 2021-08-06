@@ -20,6 +20,9 @@ class Paper(models.Model):
                 ("report", "Report"),
                 ("misc_paper", "Miscellaneous Papers"))
 
+    levels = (("","None"),("national", "National"), ("international", "International"))
+    author_levels =(("", "None"),("chief","Chief"),("correspondence","Correspondence"),("co-author","Co-Author"))
+   
     title = models.CharField(max_length=250)
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, null=True, blank=True)
@@ -28,15 +31,20 @@ class Paper(models.Model):
     paper_link = models.CharField(max_length=250, null=True, blank=True)
     status = models.CharField(max_length=10, choices=options)
     group = models.CharField(max_length=20, choices=category)
+    level = models.CharField(max_length=20, null =True, choices = levels, default = "national" )
     description = models.CharField(max_length=1000, null=True, blank=True)
     authors = models.CharField(max_length=250, null=True, blank=True)
+    author_status = models.CharField(max_length =10, null = True, choices = author_levels, default ="chief")
+    # journals-specificCh
 
-    # journals-specific
+    journal = models.CharField(max_length=250, null = True, blank = True)
     volume = models.CharField(max_length=50, null=True, blank=True)
     peer_reviewed = models.CharField(max_length=50, null=True, blank=True)
     issn = models.CharField(max_length=50, null=True, blank=True)
     issue = models.CharField(max_length=50, null=True, blank=True)
     pages = models.CharField(max_length=50, null=True, blank=True)
+    SJR_rating = models.DecimalField(max_digits=10, decimal_places=3, null = True, blank = True)
+    impact_factor_journal = models.DecimalField(max_digits =10, decimal_places =3, null =True, blank = True)
 
     # publication-specific
     DOI = models.CharField(max_length=50, null=True, blank=True)

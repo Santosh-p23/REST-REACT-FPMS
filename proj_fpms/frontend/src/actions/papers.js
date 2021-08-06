@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { createMessages, returnErrors } from './messages'
 
-import { GET_PAPERS, DELETE_PAPERS, ADD_PAPERS, SEARCH_PAPERS, GET_PAPER } from './types'
+import { GET_PAPERS, DELETE_PAPERS, ADD_PAPERS, SEARCH_PAPERS, GET_PAPER, PUT_PAPERS } from './types'
 
 import { tokenConfig } from './auth'
 
@@ -90,6 +90,25 @@ export const deletePapers = (id) => (dispatch, getState) => {
         .catch(err => console.log(err));
 
 
+
+}
+
+
+export const putPapers = (id, paper) => (dispatch, getState) => {
+
+    const body = JSON.stringify(paper)
+    console.log("The body is ", body)
+
+    axios
+        .put(`/api/papers/${id}/`, body, tokenConfig(getState))
+        .then((res) => {
+            dispatch(createMessages({ editPaper: "Paper Edited" }))
+            dispatch({
+                type: PUT_PAPERS,
+                payload: res.data
+            });
+        })
+        .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 
 }
 
