@@ -326,7 +326,7 @@ export class Papers extends Component {
                   </div>
 
                   <div className="form-group my-2">
-                    <label>SJR points</label>
+                    <label>SJR Index</label>
                     <input
                       className="form-control"
                       type="text"
@@ -337,7 +337,7 @@ export class Papers extends Component {
                   </div>
 
                   <div className="form-group my-2">
-                    <label>Impact Factor Journal Index</label>
+                    <label>Journal Impact Factor</label>
                     <input
                       className="form-control"
                       type="text"
@@ -452,7 +452,7 @@ export class Papers extends Component {
                   </div>
 
                   <div className="form-group my-2">
-                    <label>Conference Location</label>
+                    <label>Location</label>
                     <input
                       className="form-control"
                       type="text"

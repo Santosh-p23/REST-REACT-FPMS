@@ -45,7 +45,7 @@ export class PaperList extends Component {
         const wb = { Sheets: { 'data': ws }, SheetNames: ['data'] };
         const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
         const data = new Blob([excelBuffer], { type: fileType });
-        FileSaver.saveAs(data, fileName + fileExtension);
+        FileSaver.saveAs(data, fileName+'_'+ this.state.group + fileExtension);
     }
 
 
@@ -68,6 +68,28 @@ export class PaperList extends Component {
             return paper
         })
 
+
+        let UGCpapers = papers.map((paper)=>{
+            let UGCpaper ={
+                Title: paper.title,
+                Authors: paper.authors,
+                Contribution_Status: paper.author_status,
+                Publication_Date: paper.publication_date,
+                Publisher: paper.publisher +". "+paper.location,
+                Conference_Name: paper.conference_name +". "+ paper.location,
+                Journal_Name: paper.journal,
+                Paper_link: paper.paper_link  
+            }
+
+            if(group !=="journal"){ delete UGCpaper.Journal_Name}
+            if(group !=="conference_article"){ delete UGCpaper.Conference_Name}
+            if(group =="report"){ delete UGCpaper.Contribution_Status}
+            
+            return UGCpaper
+        })
+
+      
+
         return (
             <Fragment>
 
@@ -77,7 +99,7 @@ export class PaperList extends Component {
                         <i className="far fa-file-pdf"></i>
                     </button>
 
-                    <button className="btn btn-success ms-auto d-print-none mx-2" onClick={(e) => this.exportToCSV(papers, this.props.user.username)}>
+                    <button className="btn btn-success ms-auto d-print-none mx-2" onClick={(e) => (format =="UGC")?this.exportToCSV(UGCpapers, this.props.user.username):this.exportToCSV(papers, this.props.user.username)}>
                         <i className="far fa-file-excel"></i>
                     </button>
                 </div>
@@ -121,7 +143,7 @@ export class PaperList extends Component {
                                     name="impact_factor"
                                     value={impact_factor}>
                                     <option value=''>---</option>
-                                    <option value="SJR">SJR</option>
+                                    <option value="SJR">SJR Index</option>
                                     <option value="impact_factor">Impact Factor</option>
                                 </select>
                             </div> : ''}
@@ -135,6 +157,8 @@ export class PaperList extends Component {
                                 <option value=''>---</option>
                                 <option value="MLA">MLA</option>
                                 <option value="APA">APA</option>
+                                <option value="UGC">UGC/TU</option>
+                                <option value="IEEE">IEEE</option>
                             </select>
                         </div>
 

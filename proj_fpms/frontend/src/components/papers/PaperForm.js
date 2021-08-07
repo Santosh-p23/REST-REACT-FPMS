@@ -31,12 +31,12 @@ export class PaperForm extends Component {
     journal: '',
     edition: '',
     isbn: '',
-    level:'',
+    level: '',
     chapters: '',
     authors: '',
-    author_status:'',
-    impact_factor_journal:'',
-    SJR_rating:'',
+    author_status: '',
+    impact_factor_journal: '',
+    SJR_rating: '',
 
     conference_name: '',
     location: '',
@@ -81,14 +81,14 @@ export class PaperForm extends Component {
       journal: '',
       edition: '',
       isbn: '',
-      level:'',
+      level: '',
       chapters: '',
       authors: '',
-      author_status:'',
-      SJR_rating:'',
-      impact_factor_journal:'',
-      group:'',
-      status:'',
+      author_status: '',
+      SJR_rating: '',
+      impact_factor_journal: '',
+      group: '',
+      status: '',
 
       conference_name: '',
       location: '',
@@ -132,7 +132,7 @@ export class PaperForm extends Component {
         status = "published"
 
 
-        const paper = { title, publisher, volume, peer_reviewed, issn, issue, pages, paper_link, publication_date, status, group, description, DOI, journal, edition, isbn,level, chapters, authors, author_status, SJR_rating, impact_factor_journal, conference_name, location, organised_date }
+        const paper = { title, publisher, volume, peer_reviewed, issn, issue, pages, paper_link, publication_date, status, group, description, DOI, journal, edition, isbn, level, chapters, authors, author_status, SJR_rating, impact_factor_journal, conference_name, location, organised_date }
         this.props.addPapers(paper)
 
       }
@@ -191,14 +191,14 @@ export class PaperForm extends Component {
       journal: '',
       edition: '',
       isbn: '',
-      level:'',
+      level: '',
       chapters: '',
       authors: '',
-      author_status:'',
-      SJR_rating:'',
-      impact_factor_journal:'',
-      group:'',
-      status:'',
+      author_status: '',
+      SJR_rating: '',
+      impact_factor_journal: '',
+      group: '',
+      status: '',
 
       conference_name: '',
       location: '',
@@ -275,7 +275,7 @@ export class PaperForm extends Component {
               value={title}
             />
           </div>
-      
+
           <div className="form-group my-2">
             <label>Contribution Status</label>
             <select className="form-control"
@@ -356,31 +356,31 @@ export class PaperForm extends Component {
                 value={journal}
               />
             </div>
-            
+
             <div className="form-group my-2">
-            <label>SJR points</label>
-            <input
-              className="form-control"
-              type="text"
-              name="SJR_rating"
-              onChange={this.onChange}
-              value={SJR_rating}
-            />
-          </div>
+              <label>SJR Index</label>
+              <input
+                className="form-control"
+                type="text"
+                name="SJR_rating"
+                onChange={this.onChange}
+                value={SJR_rating}
+              />
+            </div>
 
-          <div className="form-group my-2">
-            <label>Impact Factor Journal Index</label>
-            <input
-              className="form-control"
-              type="text"
-              name="impact_factor_journal"
-              onChange={this.onChange}
-              value={impact_factor_journal}
-            />
-          </div></>
+            <div className="form-group my-2">
+              <label>Journal Impact Factor</label>
+              <input
+                className="form-control"
+                type="text"
+                name="impact_factor_journal"
+                onChange={this.onChange}
+                value={impact_factor_journal}
+              />
+            </div></>
 
-            
-            ) : ""}
+
+          ) : ""}
 
 
 
@@ -396,7 +396,7 @@ export class PaperForm extends Component {
               />
             </div>
 
-           
+
               <div className="form-group my-2">
                 <label>Pages</label>
                 <input
@@ -491,23 +491,18 @@ export class PaperForm extends Component {
                   value={organised_date}
                 />
               </div>
-
-              <div className="form-group my-2">
-                <label>Conference Location</label>
-                <input
-                  className="form-control"
-                  type="text"
-                  name="location"
-                  onChange={this.onChange}
-                  value={location}
-                />
-              </div>
-
-
-
-
             </>) : ""}
 
+          <div className="form-group my-2">
+            <label>Location</label>
+            <input
+              className="form-control"
+              type="text"
+              name="location"
+              onChange={this.onChange}
+              value={location}
+            />
+          </div>
 
 
 
