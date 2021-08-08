@@ -45,7 +45,7 @@ export class PaperList extends Component {
         const wb = { Sheets: { 'data': ws }, SheetNames: ['data'] };
         const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
         const data = new Blob([excelBuffer], { type: fileType });
-        FileSaver.saveAs(data, fileName+'_'+ this.state.group + fileExtension);
+        FileSaver.saveAs(data, fileName + '_' + this.state.group + fileExtension);
     }
 
 
@@ -69,26 +69,35 @@ export class PaperList extends Component {
         })
 
 
-        let UGCpapers = papers.map((paper)=>{
-            let UGCpaper ={
+        let UGCpapers = papers.map((paper) => {
+            let UGCpaper = {
                 Title: paper.title,
                 Authors: paper.authors,
                 Contribution_Status: paper.author_status,
                 Publication_Date: paper.publication_date,
-                Publisher: paper.publisher +". "+paper.location,
-                Conference_Name: paper.conference_name +". "+ paper.location,
+                Publisher: paper.publisher + ". " + paper.location,
+                Conference_Name: paper.conference_name + ". " + paper.location,
                 Journal_Name: paper.journal,
-                Paper_link: paper.paper_link  
+                Paper_link: paper.paper_link
             }
 
-            if(group !=="journal"){ delete UGCpaper.Journal_Name}
-            if(group !=="conference_article"){ delete UGCpaper.Conference_Name}
-            if(group =="report"){ delete UGCpaper.Contribution_Status}
-            
+            if (group !== "journal" && group!=="") { delete UGCpaper.Journal_Name }
+            if (group !== "conference_article" && group !== "") { delete UGCpaper.Conference_Name }
+            if (group == "report") { delete UGCpaper.Contribution_Status }
+
             return UGCpaper
         })
 
-      
+
+        let group_text = ''
+        if (group == "journal") group_text = 'Journal Articles'
+        if (group == "conference_article") group_text = "Conference Articles"
+        if (group == "report") group_text = "Scientific Reports"
+        if (group == "publication") group_text = "Publications"
+        if (group == "book") group_text = "Books "
+        if (group == "misc_papers") group_text = "Miscellaneous Articles"
+
+
 
         return (
             <Fragment>
@@ -99,7 +108,7 @@ export class PaperList extends Component {
                         <i className="far fa-file-pdf"></i>
                     </button>
 
-                    <button className="btn btn-success ms-auto d-print-none mx-2" onClick={(e) => (format =="UGC")?this.exportToCSV(UGCpapers, this.props.user.username):this.exportToCSV(papers, this.props.user.username)}>
+                    <button className="btn btn-success ms-auto d-print-none mx-2" onClick={(e) => (format == "UGC") ? this.exportToCSV(UGCpapers, this.props.user.username) : this.exportToCSV(papers, this.props.user.username)}>
                         <i className="far fa-file-excel"></i>
                     </button>
                 </div>
@@ -169,7 +178,9 @@ export class PaperList extends Component {
 
                 <p className="fw-light my-3">{this.props.user.profile.full_name}</p>
 
+
                 <div className="table-responsive">
+                    <p className="fw-lighter d-none d-print-block">{group_text}</p>
                     <table className="table table-borderless">
                         <tbody>
                             {displayPapers.map((paper) => (

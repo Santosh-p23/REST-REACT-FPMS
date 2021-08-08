@@ -43,7 +43,7 @@ export class PaperForm extends Component {
     organised_date: null,
 
     isBibtex: 'Import from BibTex',
-    bibtext: ''
+    bibtext: '',
 
   }
 
@@ -58,6 +58,19 @@ export class PaperForm extends Component {
     this.setState({
       isBibtex: ''
     })
+  }
+
+  handleFileChosen = (file) =>{
+   
+    let fileReader = new FileReader()
+    fileReader.onloadend = (e) =>{
+      const content = fileReader.result;
+      this.setState({
+        bibtext: content
+      })
+    }
+    fileReader.readAsText(file);
+
   }
 
   onSubmitBibtex = (e) => {
@@ -218,8 +231,14 @@ export class PaperForm extends Component {
           <h3>Import from BibTex</h3>
           <form className='my-3' onSubmit={this.onSubmitBibtex}>
 
+            <div className="mb-3">
+              <label htmlFor="formFile" className="form-label">Upload your BibTex file.</label>
+              <input className="form-control" type="file" id="formFile" accept=".bib"  onChange={e => this.handleFileChosen(e.target.files[0])}/>
+
+            </div>
+
             <div className="form-group my-2">
-              <label>Copy your BibTex here.</label>
+              <label> OR Copy your BibTex here.</label>
               <textarea
                 className="form-control"
                 type="text"
