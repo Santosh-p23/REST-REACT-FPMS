@@ -275,7 +275,7 @@ export class PaperForm extends Component {
               name="group"
               value={group}>
               <option value="">---</option>
-              <option value="journal">Journal</option>
+              <option value="journal">Journal Article</option>
               <option value="publication">Publication</option>
               <option value="report">Report</option>
               <option value="conference_article">Conference Article</option>
@@ -314,6 +314,7 @@ export class PaperForm extends Component {
               className="form-control"
               type="text"
               name="authors"
+              placeholder="lastname1, firstname1 and lastname2, firstname2 and..."
               onChange={this.onChange}
               value={authors}
             />
