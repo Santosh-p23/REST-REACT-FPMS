@@ -226,7 +226,7 @@ export class Papers extends Component {
                       onChange={this.onChange}
                       name="group"
                       value={group}>
-                      <option value="journal">Journal</option>
+                      <option value="journal">Journal Article</option>
                       <option value="publication">Publication</option>
                       <option value="report">Report</option>
                       <option value="conference_article">Conference Article</option>
