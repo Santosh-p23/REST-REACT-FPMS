@@ -23,9 +23,10 @@ EMAIL_PASSWORD: your password
 ```
 
 ## Use  
-Sign up and verify your account in order to login into the system.  
-The management of one's academic papers is provided in the profile section. You can add papers through a simple form displayed in the profile page and view the papers that have been added in the bottom of the page in a table. We facilitate multiple imports through a bibtex file (.bib file) or simply add single papers through bibtex format.
 
-The user can now export the available papers in various formts. To export the papers go to 'Export Papers' in profile. Select appropriate format from the available list. Also filter papers with the help of other parameters available on the same page. Once you have the desired paper list, you can export it as 'pdf' or spread sheet.
+**Sign up** and **verify your account** in order to **login** into the system.  
+The management of one's academic papers is provided in the **profile section**. You can add papers through a simple form displayed in the profile page and view the papers that have been added in the bottom of the page in a table. We facilitate multiple imports through a bibtex file (.bib file) or simply add single papers through bibtex format.
+
+The user can now **export** the available papers in various formts(MLA, APA, UGC/TU, IEEE). To export the papers go to 'Export Papers' in profile. Select appropriate format from the available list. Also filter papers with the help of other parameters available on the same page. Once you have the desired paper list, you can export it as **pdf** or **spread sheet**.
 
 
