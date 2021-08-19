@@ -1,5 +1,6 @@
-# REST-REACT-FPMS
-publication management system  
+# REST-REACT-FPMS (Publication Management System)  
+
+## Installation 
 It is better to clear the pycache files(if any present) before running the following commands.  
  ```
 TERMINAL
@@ -20,3 +21,8 @@ For register authentication mail:
 EMAIL_USER: your email  
 EMAIL_PASSWORD: your password  
 ```
+
+## Use  
+Sign up and verify your account in order to login into the system.  
+The management of one's academic papers is provided in the profile section. You can add papers through a simple form displayed in the profile page and view the papers that have been added in the bottom of the page in a table. We facilitate multiple imports through a bibtex file (.bib file) or simply add single papers through bibtex format.
+
